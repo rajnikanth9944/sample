@@ -14,6 +14,9 @@ public class Writer implements ItemWriter<String> {
     public void write(List<? extends String> messages) throws Exception {
         for(String msg : messages){
             System.out.println("#Writer Step: " + msg);
+			System.out.println("#Writer123.............. Step: " + msg);
+
+			
         }
     }
      
