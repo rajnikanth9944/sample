@@ -8,6 +8,8 @@ public class Processor implements ItemProcessor<String, String>{
     public String process(String content) throws Exception {
         return content.toUpperCase();
 		System.out.println("Processor................");
+		System.out.println("Processor111111111111111111111111................");
+
     }
  
 }
