@@ -11,5 +11,8 @@ public class SpringBatchApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBatchApplication.class, args);
 		System.out.println("SpringBatchApplication");
+		System.out.println("SpringBatchApplication1234");
+
+		
 	}
 }
