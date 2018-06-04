@@ -1,0 +1,46 @@
+1.First login in to Git hub account.
+2.After login create the repository account
+
+ For example sample
+ 
+3.Go to command prompt
+
+for example c:\ sample folder
+
+4. In sample folder 
+
+  c:sample> git init
+  
+  will first git init will called
+  
+5. c:sample> git add .
+
+ will add README.md
+ 
+ or we can create an empty file with README.md file in the sample folder
+ 
+ git status
+ 
+ 6.  git commit -m "first commit"
+ 
+ 
+ 7. git remote add orign https://github.com/rajnikanth9944/sample.git
+ 
+ 8. git push -u origin master
+ 
+ 
+ 
+ 
+ 
+ 9.  git add src/main/java/com/javasampleapproach/springbatch/SpringApplication.java/com/javasampleapproach/springbatch/SpringApplication
+ 
+ 
+ 10.  git commit -m "some message"
+ 
+ 11. gut push -u origin master
+ 
+ 12 git add <file-name1> <file-name2> <file-name3>..................................
+ 
+ 
+ repate step 10 and 11 to commit  code
+ 
