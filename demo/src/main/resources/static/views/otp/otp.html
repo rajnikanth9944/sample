@@ -1,0 +1,42 @@
+<!-- Content Wrapper -->
+<div class="login-wrapper">
+	<!--<div class="back-link">
+            <a href="#" class="btn btn-success"></a>
+        </div>-->
+	<div class="container-center">
+		<div class="panel panel-bd">
+			<div class="panel-heading">
+				<div class="view-header">
+					<div class="header-icon">
+						<i class="pe-7s-unlock"></i>
+					</div>
+					<div class="header-title">
+						<h3>OTP Verification</h3>
+						<small><strong>Please enter your OTP to
+								LOgin</strong></small>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form id="otpform" name="otpform">
+					<div class="form-group">
+						<input type="text"
+							class="form-control input-lg input-round text-center"
+							name="otp" ng-model="otpDto.token" placeholder="otp">
+								<span ng-show="otpform.otp.$error.required">OTP
+								is required.</span> <span style="color: red ng-show="otpform.otp.$error.pattern">
+								Please enter a valid OTP!</span>
+					</div>
+					<div align="center">
+						<a class="btn btn-primary"
+							ng-disabled="otpform.otp.$invalid"
+							ng-click="validateOtp();">Submit</a>
+							<button class="btn btn-danger" ui-sref="login">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+

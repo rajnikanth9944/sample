@@ -1,0 +1,199 @@
+
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCode();getCompanyUser();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Company Management</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Company Management</li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>&nbsp;Update
+								Profile
+							</a>
+
+
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="col-sm-12" name="addcompanyform">
+							<div class="form-group col-lg-6">
+								<label>Firstname</label> <input type="text" value=""
+									placeholder="Enter First Name" class="form-control"
+									name="firstName" id="txt_username" ng-model="user.firstName"
+									aria-required="true" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(addcompanyform.firstName.$touched && addcompanyform.firstName.$invalid)">
+									<span ng-show="addcompanyform.firstName.$error.required">First
+										Name is required.</span>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Lastname</label> <input type="text" value=""
+									placeholder="Enter Last Name" class="form-control"
+									name="lastName" id="txt_lastname" ng-model="user.lastName"
+									aria-required="true" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(addcompanyform.lastName.$touched && addcompanyform.lastName.$invalid)">
+									<span ng-show="addcompanyform.lastName.$error.required">Last
+										Name is required.</span>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Company Name</label> <input type="text" value=""
+									placeholder="Enter Company Name" class="form-control"
+									name="companyName" id="txt_companyname"
+									ng-model="user.companyName" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(addcompanyform.companyName.$touched && addcompanyform.companyName.$invalid)">
+									<span ng-show="addcompanyform.companyName.$error.required">Company
+										Name is required.</span>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Email Address</label> <input type="email" value=""
+									placeholder="Enter Email" id="txt_email" class="form-control"
+									name="email" ng-model="user.email" aria-required="true"
+									ng-disabled="user.email !=undefined" class="error"
+									id="txt_user_email" aria-invalid="true" email-available
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+								<span style="color: red" ng-cloak
+									ng-show="(addcompanyform.email.$touched && addcompanyform.email.$invalid)"></span>
+								<span ng-show="addcompanyform.email.$error.required">Email
+									is required.</span> <span style="color: red"
+									ng-show="addcompanyform.email.$error.pattern"> Please
+									enter a valid email address!</span>
+								<div ng-if="addcompanyform.$pending.emailExists">checking....</div>
+								<div ng-if="addcompanyform.$error.emailExists">Email
+									exists already</div>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Phone Number</label> <input type="text" phone-input
+									class="form-control" allow-only-numbers value=""
+									name="moiblenumber" ng-model="user.moiblenumber"
+									placeholder="Enter Mobile" aria-required="true" class="error"
+									id="txt_user_moiblenumber" aria-invalid="true" mobile-available
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									maxlength="14" minlength="14" required> <span
+									style="color: red" ng-cloak
+									ng-show="(addcompanyform.moiblenumber.$dirty && addcompanyform.moiblenumber.$invalid)">
+									<span ng-show="addcompanyform.moiblenumber.$error.required">Phone
+										Number is required.</span> <span
+									ng-show="((addcompanyform.moiblenumber.$error.minlength ||
+                           addcompanyform.moiblenumber.$error.maxlength) && 
+                           addcompanyform.moiblenumber.$dirty) ">
+										phone number should be 10 digits </span>
+									<div ng-if="addcompanyform.$pending.mobileNumberExists">checking....</div>
+									<div ng-if="addcompanyform.$error.mobileNumberExists">Phone
+										Number exists already</div>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Country</label> <select ng-model="user.countryName"
+									class="form-control" name="country" aria-required="true"
+									aria-invalid="true"
+									ng-options="country as country.name  for country in countriesList track by country.id"
+									ng-change="getAllStatesByCountryId(user.countryName.id);"
+									required>
+									<option value="" class="active">Select Country</option>
+								</select><span style="color: red" ng-cloak
+									ng-show="(addcompanyform.country.$touched && addcompanyform.country.$invalid)"></span>
+								<span ng-show="addcompanyform.country.$error.required">Country
+									is required.</span>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>State</label> <select ng-model="user.stateName"
+									class="form-control" name="state" aria-required="true"
+									aria-invalid="true"
+									ng-options="state as state.name for state in statesList track by state.id"
+									ng-change="getAllCitiesByStateId(user.stateName.id);" required>
+									<option value="" class="active">Select State</option>
+								</select><span style="color: red" ng-cloak
+									ng-show="(addcompanyform.state.$touched && addcompanyform.state.$invalid)"></span>
+								<span ng-show="addcompanyform.state.$error.required">State
+									is required.</span>
+							</div>
+
+							<div class="col-sm-6 form-group">
+											<label>City</label> <input type="text" class="form-control"
+												name="cityName" id="txt_username"
+												ng-model="user.cityName" aria-required="true"
+												aria-invalid="true" required>
+										</div>
+
+							<div class="form-group col-lg-6">
+								<label>Address</label>
+								<textarea type="text" class="form-control" rows="3"
+									ng-model="user.address1" placeholder="Enter Address" required></textarea>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Zip/Postal Code</label> <input type="text" maxlength="5"
+									ng-model="user.zipCode" class="form-control"
+									placeholder="Enter zipcode" required>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Upload Image</label> <input type="file" name="file"
+									onchange="angular.element(this).scope().fileChanged(this.files)"
+									required>
+							</div>
+
+							<!-- <div class="form-group col-lg-6"
+								ng-if="companyImagePath != undefined">
+								<label>Image</label> <img
+									ng-src="{{companyImagePath}}"  alt='Photo'>
+							</div> -->
+							<div class="col-sm-12" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+
+							<div class="col-sm-12 reset-button">
+								<div class="reset-button">
+									<button class="btn btn-success"
+										ng-click="updateCompanyUser(user);">Submit</button>
+									&nbsp;&nbsp;
+									<button class="btn btn-warning">Cancel</button>
+
+								</div>
+							</div>
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper             -->
+

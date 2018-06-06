@@ -1,0 +1,43 @@
+<div class="login-wrapper">
+	<div class="container-center">
+		<div class="panel panel-bd">
+			<div class="panel-heading">
+				<div class="view-header">
+					<div class="header-icon">
+						<i class="pe-7s-unlock"></i>
+					</div>
+					<div class="header-title">
+						<h3>Login</h3>
+						<small><strong>Please enter your credentials to
+								login.</strong></small>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<form id="loginForm" name="loginForm">
+					<div class="form-group">
+						<label class="control-label" for="username">Username</label> <input
+							type="text" placeholder="example@gmail.com"
+							ng-model="registration.username"
+							title="Please enter you username" class="form-control">
+					</div>
+
+
+					<div class="form-group">
+
+						<label class="control-label" for="password">Password</label> <input
+							type="password" name="password" ng-model="registration.password"
+							class="form-control" value="Mickey" required> </span>
+					</div>
+
+					<div>
+						<button type="submit" class="btn btn-primary"
+							ng-click="doLogin(registration)">Login</button>
+						<a class="btn btn-warning" ui-sref="signup">Register</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

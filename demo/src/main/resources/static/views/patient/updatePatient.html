@@ -1,0 +1,706 @@
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCode();getAllClients();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Patient</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Patient</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" ng-click="gotoList();"> <i
+								class="fa fa-list"></i> Patient List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form id="registrationForm" name="patientForm">
+							<div class="col-sm-12">
+								<div class="col-sm-6 form-group">
+									<label>First Name</label> <input type="text" name="firstName"
+										class="form-control" placeholder="Enter firstname"
+										ng-model="patientObject.firstName" aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required > <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.firstName.$touched && patientForm.firstName.$invalid)">
+										<span ng-show="patientForm.firstName.$error.required">First
+											Name is required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Last Name</label> <input type="text"
+										class="form-control" name="lastName"
+										placeholder="Enter Lastname" ng-model="patientObject.lastName"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required > <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.lastName.$touched && patientForm.lastName.$invalid)">
+										<span ng-show="patientForm.lastName.$error.required">Last
+											Name is required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>DOB</label> <input type="text" class="form-control"
+										placeholder="Enter DOB"
+										ng-model="patientObject.dateOfBirth | date" required
+										>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>SSN</label> <input type="text" class="form-control"
+										allow-only-numbers name="ssn" placeholder="Enter SSN"
+										ng-model="patientObject.ssn" maxlength="10"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required > <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.ssn.$touched && patientForm.ssn.$invalid)">
+										<span ng-show="patientForm.ssn.$error.required">SSN is
+											required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>UCI</label> <input type="text" class="form-control"
+										maxlength="10" placeholder="Enter UCI"
+										ng-model="patientObject.ucl" name="uci" aria-invalid="true"
+										allow-only-numbers
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required > <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.uci.$touched && patientForm.uci.$invalid)">
+										<span ng-show="patientForm.uci.$error.required">UCI is
+											required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Age</label> <input type="text" class="form-control"
+										allow-only-numbers placeholder="Enter Age"
+										ng-model="patientObject.age" name="age" aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required > <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.age.$touched && patientForm.age.$invalid)">
+										<span ng-show="patientForm.age.$error.required">Age is
+											required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Parent Name</label> <input type="text"
+										class="form-control" placeholder="Enter Parent Name"
+										name="parentname" ng-model="patientObject.gaurdian"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required > <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.parentname.$touched && patientForm.parentname.$invalid)">
+										<span ng-show="patientForm.parentname.$error.required">Parent
+											Name is required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Phone Number</label> <input type="text"
+										class="form-control" phone-input maxlength="14" minlength="14"
+										value="" name="mobileNumber"
+										ng-model="patientObject.mobileNumber"
+										placeholder="Enter Phone Number" aria-required="true"
+										class="error" id="txt_patient_mobileNumber"
+										aria-invalid="true" mobile-available
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										maxlength="10" required > <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.mobileNumber.$dirty && patientForm.mobileNumber.$invalid)">
+										<span ng-show="patientForm.mobileNumber.$error.required">PhoneNumber
+											is required.</span> <span
+										ng-show="((patientForm.mobileNumber.$error.minlength ||
+                           patientForm.mobileNumber.$error.maxlength) && 
+                           patientForm.mobileNumber.$dirty) ">
+											phone number should be 10 digits </span>
+										<div ng-if="patientForm.$pending.mobileNumberExists">checking....</div>
+										<div ng-if="patientForm.$error.mobileNumberExists">PhoneNumber
+											exists already</div>
+								</div>
+								<div class="col-lg-6 form-group">
+									<label>Secondary Phone Number</label> <input type="text"
+										class="form-control" phone-input maxlength="14" minlength="14"
+										value="" name="mobileNumber"
+										ng-model="patientObject.secondaryNumber"
+										placeholder="Enter Phone Number" aria-required="true"
+										class="error" id="txt_patient_mobileNumber"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										maxlength="10">
+								</div>
+
+								<div class="form-group col-lg-6">
+									<label>Type of Client</label> <input
+										ng-model="patientObject.clientType.clientTypeName"
+										class="form-control" name="client" aria-required="true"
+										aria-invalid="true" required > <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.client.$touched && patientForm.client.$invalid)">
+										<span ng-show="patientForm.client.$error.required">Type
+											of Client is required.</span></span>
+								</div>
+								<div ng-if="patientObject.clientType.clientTypeName=='Regional Center'"
+									class="col-sm-12 border">
+									<center>
+										<label><u>Regional Center Details</u></label>
+									</center>
+									<hr>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.regionalCenter.serviceCoordinator == undefined || patientObject.regionalCenter.serviceCoordinator =='' "
+											style="color: red">*</span>Service Coordinator</label> <input
+											type="text" name="serviceco" class="form-control"
+											placeholder="Enter Service Coordinator"
+											ng-model="patientObject.regionalCenter.serviceCoordinator" required>
+										<span style="color: red"
+											ng-show="(patientForm.serviceco.$touched && patientForm.serviceco.$invalid)">
+											<span ng-show="patientForm.serviceco.$error.required">Service
+												Coordinator is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.regionalCenter.email == undefined || patientObject.regionalCenter.email =='' "
+											style="color: red">*</span>E-Mail</label> <input type="text"
+											name="servicecoEmail" class="form-control"
+											placeholder="Enter Service Coordinator Email"
+											ng-model="patientObject.regionalCenter.email" required> <span
+											style="color: red"
+											ng-show="(patientForm.servicecoEmail.$touched && patientForm.servicecoEmail.$invalid)">
+											<span ng-show="patientForm.servicecoEmail.$error.required">Email
+												is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.regionalCenter.mobileNumber == undefined || patientObject.regionalCenter.mobileNumber =='' "
+											style="color: red">*</span>Phone Number</label> <input type="text"
+											name="servicecoMobileNumber" class="form-control"
+											placeholder="Enter Service Coordinator Phone Number"
+											ng-model="patientObject.regionalCenter.mobileNumber" required>
+										<span style="color: red"
+											ng-show="(patientForm.servicecoMobileNumber.$touched && patientForm.servicecoMobileNumber.$invalid)">
+											<span
+											ng-show="patientForm.servicecoMobileNumber.$error.required">Phone
+												Number is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.regionalCenter.reginoalCenterAddress.address1 == undefined || patientObject.regionalCenter.reginoalCenterAddress.address1 =='' "
+											style="color: red">*</span>Address 1</label> <input type="text"
+											name="servicecoAddress" class="form-control"
+											placeholder="Enter Service Coordinator Address 1"
+											ng-model="patientObject.regionalCenter.reginoalCenterAddress.address1" required>
+										<span style="color: red"
+											ng-show="(patientForm.servicecoAddress.$touched && patientForm.servicecoAddress.$invalid)">
+											<span ng-show="patientForm.servicecoAddress.$error.required">Address
+												1 is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.regionalCenter.reginoalCenterAddress.address2 == undefined || patientObject.regionalCenter.reginoalCenterAddress.address2 =='' "
+											style="color: red">*</span>Address 2</label> <input type="text"
+											name="servicecoAddress2" class="form-control"
+											placeholder="Enter Service Coordinator Address 1"
+											ng-model="patientObject.regionalCenter.reginoalCenterAddress.address2" required>
+										<span style="color: red"
+											ng-show="(patientForm.servicecoAddress2.$touched && patientForm.servicecoAddress2.$invalid)">
+											<span ng-show="patientForm.servicecoAddress2.$error.required">Address
+												2 is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.regionalCenter.reginoalCenterAddress.country == undefined || patientObject.regionalCenter.reginoalCenterAddress.country =='' "
+											style="color: red">*</span>Country</label> <select
+											ng-model="patientObject.regionalCenter.reginoalCenterAddress.country" class="form-control"
+											name="rccountry" aria-required="true" aria-invalid="true"
+											ng-options="country as country.name  for country in countriesList  track by country.id"
+											ng-change="getAllStatesByCountryId(patientObject.regionalCenter.reginoalCenterAddress.country.id);"
+											required>
+											<option value="" class="active">Select Country</option>
+										</select> <span style="color: red"
+											ng-show="(patientForm.rccountry.$touched && patientForm.rccountry.$invalid)">
+											<span ng-show="patientForm.rccountry.$error.required">Country
+												is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.regionalCenter.reginoalCenterAddress.state == undefined || patientObject.regionalCenter.reginoalCenterAddress.state =='' "
+											style="color: red">*</span>State</label> <select
+											ng-model="patientObject.regionalCenter.reginoalCenterAddress.state" class="form-control"
+											name="rcstate" aria-required="true" aria-invalid="true"
+											ng-options="state as state.name for state in statesList track by state.id"
+											ng-change="getAllCitiesByStateId(patientObject.regionalCenter.reginoalCenterAddress.state.id);"
+											required>
+											<option value="" class="active">Select State</option>
+										</select> <span style="color: red"
+											ng-show="(patientForm.rcstate.$touched && patientForm.rcstate.$invalid)">
+											<span ng-show="patientForm.rcstate.$error.required">State
+												is required.</span>
+										</span>
+									</div>
+
+
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.regionalCenter.reginoalCenterAddress.city.name == undefined || patientObject.regionalCenter.reginoalCenterAddress.city.name =='' "
+											style="color: red">*</span>City</label> <input type="text" value=""
+											class="form-control" name="rccityName" id="txt_username"
+											ng-model="patientObject.regionalCenter.reginoalCenterAddress.city.name" aria-required="true"
+											aria-invalid="true" required><span style="color: red"
+											ng-show="(patientForm.rccityName.$touched && patientForm.rccityName.$invalid)">
+											<span ng-show="patientForm.rccityName.$error.required">City
+												is required.</span>
+										</span>
+
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.regionalCenter.reginoalCenterAddress.zipcode == undefined || patientObject.regionalCenter.reginoalCenterAddress.zipcode == '' "
+											style="color: red">*</span>Zip/Postal Code</label> <input type="text"
+											allow-only-numbers ng-model="patientObject.regionalCenter.reginoalCenterAddress.zipcode"
+											class="form-control" name="rczipcode" maxlength="5"
+											placeholder="Enter zipcode" required> <span
+											style="color: red"
+											ng-show="(patientForm.rczipcode.$touched && patientForm.rczipcode.$invalid)">
+											<span ng-show="patientForm.rczipcode.$error.required">Zip/Postal
+												Code is required.</span>
+										</span>
+									</div>
+
+								</div>
+								<div ng-if="patientObject.clientType.clientTypeName=='Insurance'"
+									class="col-sm-12 border">
+									<center>
+										<label><u>Insurance Details</u></label>
+									</center>
+									<hr>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.idNumber == undefined || patientObject.insurance.idNumber =='' "
+											style="color: red">*</span>Insurance Number</label> <input
+											type="text" name="insuranceNumber" class="form-control"
+											placeholder="Enter Insurance Number"
+											ng-model="patientObject.insurance.idNumber" required>
+										<span style="color: red"
+											ng-show="(patientForm.insuranceNumber.$touched && patientForm.insuranceNumber.$invalid)">
+											<span ng-show="patientForm.insuranceNumber.$error.required">Insurance Number is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.insuranceCompanyName == undefined || patientObject.insurance.insuranceCompanyName =='' "
+											style="color: red">*</span>Insurance CompanyName</label> <input
+											type="text" name="insuranceCompanyName" class="form-control"
+											placeholder="Enter Insurance CompanyName"
+											ng-model="patientObject.insurance.insuranceCompanyName" required>
+										<span style="color: red"
+											ng-show="(patientForm.insuranceCompanyName.$touched && patientForm.insuranceCompanyName.$invalid)">
+											<span ng-show="patientForm.insuranceCompanyName.$error.required">Insurance CompanyName is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.email == undefined || patientObject.insurance.email =='' "
+											style="color: red">*</span>E-Mail</label> <input type="text"
+											name="insuranceEmail" class="form-control"
+											placeholder="Enter Insurance Email"
+											ng-model="patientObject.insurance.email" required> <span
+											style="color: red"
+											ng-show="(patientForm.insuranceEmail.$touched && patientForm.insuranceEmail.$invalid)">
+											<span ng-show="patientForm.insuranceEmail.$error.required">Email
+												is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.mobileNumber == undefined || patientObject.insurance.mobileNumber =='' "
+											style="color: red">*</span>Phone Number</label> <input type="text"
+											name="insuranceMobileNumber" class="form-control"
+											placeholder="Enter Insurance Phone Number"
+											ng-model="patientObject.insurance.mobileNumber" required>
+										<span style="color: red"
+											ng-show="(patientForm.insuranceMobileNumber.$touched && patientForm.insuranceMobileNumber.$invalid)">
+											<span
+											ng-show="patientForm.insuranceMobileNumber.$error.required">Phone
+												Number is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.groupNumber == undefined || patientObject.insurance.groupNumber =='' "
+											style="color: red">*</span>Group Number</label> <input type="text"
+											name="groupNumber" class="form-control"
+											placeholder="Enter Group Number"
+											ng-model="patientObject.insurance.groupNumber" required>
+										<span style="color: red"
+											ng-show="(patientForm.groupNumber.$touched && patientForm.groupNumber.$invalid)">
+											<span
+											ng-show="patientForm.groupNumber.$error.required">Group
+												Number is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.planCode == undefined || patientObject.insurance.planCode =='' "
+											style="color: red">*</span>PlanCode</label> <input type="text"
+											name="planCode" class="form-control"
+											placeholder="Enter PlanCode"
+											ng-model="patientObject.insurance.planCode" required>
+										<span style="color: red"
+											ng-show="(patientForm.planCode.$touched && patientForm.planCode.$invalid)">
+											<span
+											ng-show="patientForm.planCode.$error.required">Group
+												Number is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.address.address1 == undefined || patientObject.insurance.address.address1 =='' "
+											style="color: red">*</span>Address 1</label> <input type="text"
+											name="insuranceAddress" class="form-control"
+											placeholder="Enter Service Coordinator Address 1"
+											ng-model="patientObject.insurance.address.address1" required>
+										<span style="color: red"
+											ng-show="(patientForm.insuranceAddress.$touched && patientForm.insuranceAddress.$invalid)">
+											<span ng-show="patientForm.insuranceAddress.$error.required">Address
+												1 is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.insurance.address.address2 == undefined || patientObject.insurance.address.address2 =='' "
+											style="color: red">*</span>Address 2</label> <input type="text"
+											name="insuranceAddress2" class="form-control"
+											placeholder="Enter Service Coordinator Address 1"
+											ng-model="patientObject.insurance.address.address2" required>
+										<span style="color: red"
+											ng-show="(patientForm.insuranceAddress2.$touched && patientForm.insuranceAddress2.$invalid)">
+											<span ng-show="patientForm.insuranceAddress2.$error.required">Address
+												2 is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.insurance.address.country == undefined || patientObject.insurance.address.country =='' "
+											style="color: red">*</span>Country</label> <select
+											ng-model="patientObject.insurance.address.country" class="form-control"
+											name="insurancecountry" aria-required="true" aria-invalid="true"
+											ng-options="country as country.name  for country in countriesList  track by country.id"
+											ng-change="getAllStatesByCountryId(patientObject.insurance.address.country.id);"
+											required>
+											<option value="" class="active">Select Country</option>
+										</select> <span style="color: red"
+											ng-show="(patientForm.insurancecountry.$touched && patientForm.insurancecountry.$invalid)">
+											<span ng-show="patientForm.insurancecountry.$error.required">Country
+												is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.insurance.address.state == undefined || patientObject.insurance.address.state =='' "
+											style="color: red">*</span>State</label> <select
+											ng-model="patientObject.insurance.address.state" class="form-control"
+											name="insurancestate" aria-required="true" aria-invalid="true"
+											ng-options="state as state.name for state in statesList track by state.id"
+											ng-change="getAllCitiesByStateId(patientObject.insurance.address.state.id);"
+											required>
+											<option value="" class="active">Select State</option>
+										</select> <span style="color: red"
+											ng-show="(patientForm.insurancestate.$touched && patientForm.insurancestate.$invalid)">
+											<span ng-show="patientForm.insurancestate.$error.required">State
+												is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.insurance.address.city.name == undefined || patientObject.insurance.address.city.name =='' "
+											style="color: red">*</span>City</label> <input type="text" value=""
+											class="form-control" name="insurancecityName" id="txt_username"
+											ng-model="patientObject.insurance.address.city.name" aria-required="true"
+											aria-invalid="true" required><span style="color: red"
+											ng-show="(patientForm.insurancecityName.$touched && patientForm.insurancecityName.$invalid)">
+											<span ng-show="patientForm.insurancecityName.$error.required">City
+												is required.</span>
+										</span>
+
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.insurance.address.zipcode == undefined || patientObject.insurance.address.zipcode == '' "
+											style="color: red">*</span>Zip/Postal Code</label> <input type="text"
+											allow-only-numbers ng-model="patientObject.insurance.address.zipcode"
+											class="form-control" name="insurancezipcode" maxlength="5"
+											placeholder="Enter zipcode" required> <span
+											style="color: red"
+											ng-show="(patientForm.insurancezipcode.$touched && patientForm.insurancezipcode.$invalid)">
+											<span ng-show="patientForm.insurancezipcode.$error.required">Zip/Postal
+												Code is required.</span>
+										</span>
+									</div>
+
+								</div>
+
+
+								<div class="form-group col-lg-6">
+									<label>Country</label> <input
+										ng-model="patientObject.address.country.name"
+										class="form-control" name="country" aria-required="true"
+										aria-invalid="true" required > <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.country.$touched && patientForm.country.$invalid)">
+										<span ng-show="patientForm.country.$error.required">Country
+											is required.</span></span>
+								</div>
+								<div class="form-group col-lg-6">
+									<label>State</label> <input
+										ng-model="patientObject.address.state.name"
+										class="form-control" name="state" aria-required="true"
+										aria-invalid="true" required > <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.state.$touched && patientForm.state.$invalid)">
+										<span ng-show="patientForm.state.$error.required">State
+											is required.</span></span>
+								</div>
+
+
+								<div class="form-group col-lg-6">
+									<label>City</label> <input
+										ng-model="patientObject.address.city.name"
+										class="form-control" name="city" aria-required="true"
+										aria-invalid="true" required > <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.city.$touched && patientForm.city.$invalid)">
+										<span ng-show="patientForm.city.$error.required">City
+											is required.</span></span>
+								</div>
+
+								<div class="form-group col-lg-6">
+									<label>Address</label>
+									<textarea type="text" class="form-control" rows="3"
+										ng-model="patientObject.address.address1" name="address"
+										placeholder="Enter Address" required ></textarea>
+									<span style="color: red" ng-cloak
+										ng-show="(patientForm.address.$touched && patientForm.address.$invalid)">
+										<span ng-show="patientForm.address.$error.required">Address
+											is required.</span></span>
+								</div>
+								<div class="form-group col-lg-6">
+									<label>Zip/Postal Code</label> <input type="text"
+										allow-only-numbers ng-model="patientObject.address.zipcode"
+										class="form-control" name="zipcode" maxlength="5"
+										placeholder="Enter zipcode" required >
+									<span style="color: red" ng-cloak
+										ng-show="(patientForm.zipcode.$touched && patientForm.zipcode.$invalid)">
+										<span ng-show="patientForm.zipcode.$error.required">Zip/Postal
+											Code is required.</span></span>
+								</div>
+
+
+								<div class="col-sm-6 form-group">
+									<label>Status</label>&nbsp;&nbsp; <label class="radio-inline"><input
+										type="radio" name="status" ng-value="true"
+										ng-model="patientObject.active">Active</label> <label
+										class="radio-inline"><input type="radio"
+										ng-model="patientObject.active" name="status" ng-value="false">InActive</label>
+								</div>
+
+								<div class="col-sm-6 form-group">
+									<label>Communication Status</label>&nbsp;&nbsp; <label
+										class="checkbox-inline"><input checked="checked"
+										type="checkbox" ng-model="patientObject.communicatonEmail">Email</label>
+									<label class="checkbox-inline"><input name="sms"
+										type="checkbox" checked="checked" ng-model="patientObject.sms">SMS</label>
+								</div>
+
+								<div class="form-group col-sm-6"
+									ng-if="patientObject.communicatonEmail !=undefined && patientObject.communicatonEmail==true">
+									<label class="control-label" for="emailid">Email Id</label> <input
+										type="email" value="" placeholder="Enter Email" id="txt_email"
+										class="form-control" name="email"
+										ng-model="patientObject.email" aria-required="true"
+										class="error" id="txt_user_email" aria-invalid="true"
+										email-available
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+									<span style="color: red" ng-cloak
+										ng-show="(patientForm.email.$touched && patientForm.email.$invalid)"></span>
+									<span ng-show="patientForm.email.$error.required">Email
+										is required.</span> <span style="color: red"
+										ng-show="patientForm.email.$error.pattern"> Please
+										enter a valid email address!</span>
+									<div ng-if="patientForm.$pending.emailExists"
+										style="color: red">checking....</div>
+									<div ng-if="patientForm.$error.emailExists" style="color: red">Email
+										exists already</div>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Is Evalution Done?</label>&nbsp;&nbsp; <label
+										class="checkbox-inline"><input type="radio"  name="evalutionDone"
+										ng-value=true
+										ng-model="patientObject.evalutionDone">Yes</label> <label
+										class="checkbox-inline"> <input type="radio"
+										name="evalutionDone" ng-model="patientObject.evalutionDone"
+										ng-value=false>No
+									</label>
+								</div>
+								<div class="col-sm-6 form-group">
+								<label>Document Type</label> <select name="documentType"
+									class="form-control" ng-model="documentType"
+									required>
+									<option value="" >Select Document Type</option>
+									<option value="PATIENT" >Patient</option>
+									<option value="EVALUATION" >Evaluation</option>
+									<option value="THERAPIST" >Therapist</option>
+								</select> <span style="color: red"
+										ng-show="(patientForm.documentType.$touched && patientForm.documentType.$invalid)">
+										<span ng-show="patientForm.documentType.$error.required">Document Type
+											is required.</span>
+									</span>
+							</div>
+								<div class="col-sm-6 form-group"
+									>
+									<label>Upload Document</label>&nbsp;&nbsp; <input type="file"
+										name="file"
+										onchange="angular.element(this).scope().documentChanged(this.files,documentType);">
+									<span style="color: red"> Only PDF Files are allowed to
+										upload</span>
+								</div>
+								<div class="col-sm-12">
+									<input type="checkbox" ng-model="ModelData123" checked="checked"/>&nbsp;Therapy Address Is Different Please Check Here
+									<div class="form-group" ng-show="ModelData123">
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.therapyAddress.address1 == undefined || patientObject.therapyAddress.address1 =='' "
+											style="color: red">*</span>Address 1</label> <input type="text"
+											name="therapyAddress1" class="form-control"
+											placeholder="Enter Therapy Address 1"
+											ng-model="patientObject.therapyAddress.address1" required>
+										<span style="color: red"
+											ng-show="(patientForm.therapyAddress1.$touched && patientForm.therapyAddress1.$invalid)">
+											<span ng-show="patientForm.therapyAddress1.$error.required">Address
+												1 is required.</span>
+										</span>
+									</div>
+									<div class="col-lg-6 form-group">
+										<label><span
+											ng-if="patientObject.therapyAddress.address2 == undefined || patientObject.therapyAddress.address2 =='' "
+											style="color: red">*</span>Address 2</label> <input type="text"
+											name="therapyAddress2" class="form-control"
+											placeholder="Enter Therapy Address 1"
+											ng-model="patientObject.therapyAddress.address2" required>
+										<span style="color: red"
+											ng-show="(patientForm.therapyAddress2.$touched && patientForm.therapyAddress2.$invalid)">
+											<span ng-show="patientForm.therapyAddress2.$error.required">Address
+												2 is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.therapyAddress.country == undefined || patientObject.therapyAddress.country =='' "
+											style="color: red">*</span>Country</label> <select
+											ng-model="patientObject.therapyAddress.country"
+											class="form-control" name="therapycountry"
+											aria-required="true" aria-invalid="true"
+											ng-options="country as country.name  for country in countriesList track by country.id"
+											ng-change="getAllStatesByCountryId(patientObject.therapyAddress.country.id);"
+											required>
+											<option value="" class="active">Select Country</option>
+										</select> <span style="color: red"
+											ng-show="(patientForm.therapycountry.$touched && patientForm.therapycountry.$invalid)">
+											<span ng-show="patientForm.therapycountry.$error.required">Country
+												is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.therapyAddress.state == undefined || patientObject.therapyAddress.state =='' "
+											style="color: red">*</span>State</label> <select
+											ng-model="patientObject.therapyAddress.state"
+											class="form-control" name="therapystate"
+											aria-required="true" aria-invalid="true"
+											ng-options="state as state.name for state in statesList track by state.id"
+											ng-change="getAllCitiesByStateId(patientObject.therapyAddress.state.id);"
+											required>
+											<option value="" class="active">Select State</option>
+										</select> <span style="color: red"
+											ng-show="(patientForm.therapystate.$touched && patientForm.therapystate.$invalid)">
+											<span ng-show="patientForm.therapystate.$error.required">State
+												is required.</span>
+										</span>
+									</div>
+
+
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.therapyAddress.cityName == undefined || patientObject.therapyAddress.cityName =='' "
+											style="color: red">*</span>City</label> <input type="text" value=""
+											class="form-control" name="therapycityName"
+											id="txt_username"
+											ng-model="patientObject.therapyAddress.cityName"
+											aria-required="true" aria-invalid="true" required><span
+											style="color: red"
+											ng-show="(patientForm.therapycityName.$touched && patientForm.therapycityName.$invalid)">
+											<span ng-show="patientForm.therapycityName.$error.required">City
+												is required.</span>
+										</span>
+
+									</div>
+									<div class="form-group col-lg-6">
+										<label><span
+											ng-if="patientObject.therapyAddress.zipcode == undefined || patientObject.therapyAddress.zipcode == '' "
+											style="color: red">*</span>Zip/Postal Code</label> <input type="text"
+											allow-only-numbers
+											ng-model="patientObject.therapyAddress.zipcode"
+											class="form-control" name="therapyAddresszipcode" maxlength="5"
+											placeholder="Enter zipcode" required> <span
+											style="color: red"
+											ng-show="(patientForm.therapyAddresszipcode.$touched && patientForm.therapyAddresszipcode.$invalid)">
+											<span ng-show="patientForm.therapyAddresszipcode.$error.required">Zip/Postal
+												Code is required.</span>
+										</span>
+									</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						
+						<div align="center">
+							<button class="btn btn-primary" ng-click="updatePatient()">Update</button>
+							<button class="btn btn-danger" ng-click="gotoback()">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- /.content -->
+</div>

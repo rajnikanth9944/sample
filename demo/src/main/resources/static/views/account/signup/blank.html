@@ -1,0 +1,45 @@
+<br>
+<h1 style="margin: auto;" ng-if="selectedCountries.length>0">MATCHED CONDITION</h1>
+
+<br>
+<form>
+<label>Florida Medicaid Preferred Drug List</label>
+<button type="button" class="pull-right btn btn-info" ng-click="gotoLogin();">Logout</button>
+
+<input type="text"  id="florida" ng-model="search" class="form-control" ng-change="searchAllStates();">
+</form>
+<!-- <select ng-model="search" ng-change="searchAllStates();" class="form-control" placeholder="enter state name" ng-options="state as state.name for state in  statesListBySearch track by state.id"><option value="" class="active">{{state.name}}</option></select> -->
+
+	<ul class="list-group">
+				<li class="list-group-item" ng-repeat="state in  statesListBySearch" ng-click="fillTextbox(state.name)">{{state.name}}</li>
+			</ul>
+
+	<style type="text/css">
+		.list-group-item:hover{
+			color: #337ab7;
+			text-shadow:  0 0 1em #337ab7;
+			cursor: pointer;
+		}
+	</style>
+
+<br>
+<br>
+ <br>
+<br>
+<br>
+<br>
+ <br>
+<br>
+<form>
+<label>Georgia Medicaid/PeachCare Preferred Drug List</label>
+
+<input type="text" id="georgia" ng-model="searchs"  class="form-control"  ng-change="searchAllCountry();">
+</form>
+<ul class="list-group">
+				<li class="list-group-item" ng-repeat="country in  countryListBySearch" ng-click="fillTextboxForCountry(country.name)">{{country.name}}</li>
+			</ul>
+<!-- <table >
+<tr ng-repeat="country in  countryListBySearch">
+<td ng-if="search != undefined || search != '' ">{{country.name}}</td>
+</tr>
+</table> -->

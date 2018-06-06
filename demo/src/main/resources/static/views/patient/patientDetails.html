@@ -1,0 +1,177 @@
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCode();getAllClients();getCycles();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+
+			<h1>Patient Details</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Patient Details</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<div class="col-sm-12">
+
+
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-body">
+							<div class="border">
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.firstName}} {{patientObject.lastName}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>DOB :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.dateOfBirth | date}}</p>
+										<!-- <input type="date" ng-model="patientObject.dateOfBirth | date"> -->
+									</div>
+								</div>
+
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>UCI :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.ucl}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Age :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.age}}</p>
+									</div>
+								</div>
+
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Parent Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gaurdian}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Phone Number :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.mobileNumber}}</p>
+									</div>
+								</div>
+
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Email Id :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.email}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Gender :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gender}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+							
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Country :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address.country.name}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>State :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address.state.name}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>City :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address.cityName}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Address :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address.address1}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Postal Code :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address.zipcode}}</p>
+									</div>
+								</div>
+								
+								<!-- <div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Address :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gender}}</p>
+									</div>
+								</div> -->
+								
+								<br> <br>
+								
+							</div>
+							
+							
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

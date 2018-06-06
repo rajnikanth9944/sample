@@ -1,0 +1,48 @@
+<div class="login-wrapper">
+	<div class="container-center">
+		<div class="panel panel-bd">
+			<div class="panel-heading">
+				<div class="view-header">
+					<div class="header-icon"></div>
+					<div class="header-title">
+						<h3>Registration</h3>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<form id="loginForm" name="loginForm">
+					<div class="form-group">
+						<label class="control-label" for="username">First Name</label> <input
+							type="text" ng-model="userDto.firstName"
+							title="Please enter you username" class="form-control">
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="username">Last Name</label> <input
+							type="text" ng-model="userDto.lastName"
+							title="Please enter you username" class="form-control">
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="username">Username</label> <input
+							type="email" placeholder="example@gmail.com"
+							ng-model="userDto.email"
+							title="Please enter you username" class="form-control">
+
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="password">Password</label> <input
+							type="password" name="password" ng-model="userDto.password"
+							class="form-control" value="Mickey" required> 
+					</div>
+
+					<div>
+						<button type="submit" class="btn btn-primary"
+							ng-click="doSignUp()">Register</button>
+						<a class="btn btn-warning" ui-sref="signup">Register</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,199 @@
+<div class="panel-body table-responsive" ng-init="getExitSheetReportBy();getDoctorByPatientId();">
+	<div class="col-sm-12">
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Name :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.firstName}} {{patientObject.lastName}}</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Date of Test :</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="date" ng-model="today">
+			</div>
+		</div>
+		<br> <br>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>UCI :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.ucl}}</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Evaluator :</label>
+			</div>
+				<div class="col-sm-6" ng-if="doctorObj != undefined"><p>{{doctorObj.firstName}} {{doctorObj.lastName}}</p></div>
+		</div>
+		<br> <br>
+		
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Age :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.age}}</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Service Coordinator :</label>
+			</div>
+			<div class="col-sm-6">
+				<p></p>
+			</div>
+		</div>
+		<br> <br>
+		<!-- <div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Language :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>20 months</p>
+			</div>
+		</div> -->
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Parent :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.gaurdian}}</p>
+			</div>
+		</div>
+		<br> <br>
+	</div>
+	<div class="col-sm-12">
+		<br> <label>History :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="2000"
+			ng-model="exitNote.history"></textarea>
+		<p style="font-size: 11px;color: blue">{{2000 - exitNote.history.length}}&nbsp;Characters Left</p>
+		
+		<br> <label>Background Information :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="3000"
+			ng-model="exitNote.backgroundInformation"></textarea>
+		<p style="font-size: 11px;color: blue">{{3000-exitNote.backgroundInformation.length}}&nbsp;Characters Left</p>	
+
+		<br> <label>Observation :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="2000"
+			ng-model="exitNote.observation"></textarea>
+		<p style="font-size: 11px;color: blue">{{2000-exitNote.observation.length}}&nbsp;Characters Left</p>	
+
+		<br> <label>Test Administered :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="1000"
+			ng-model="exitNote.testAdministered"></textarea>
+		<p style="font-size: 11px;color: blue">{{1000-exitNote.testAdministered.length}}&nbsp;Characters Left</p>	
+
+			<table class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border table table-bordered table-hover"
+				cellspacing="10">
+				<tr>
+					<th>Result</th>
+					<th>Standard Score</th>
+					<th>Percentile</th>
+					<th>Age Equivalent</th>
+					<th>Delay %</th>
+				</tr>
+				<tr>
+					<td><label
+						ng-model="exitNote.evalutionSheetResult.auditotyCategoryName">Auditoty
+							Comprehension</label></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.auditotyStandardScore"
+						allow-only-numbers /></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.auditotyAge"
+						allow-only-numbers /></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.auditotyPercentile"
+						allow-only-numbers /></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.auditotyDelay"
+						allow-only-numbers /></td>
+				</tr>
+				<tr>
+					<td><label
+						ng-model="exitNote.evalutionSheetResult.expressiveCategoryName">Expressive
+							Communication</label></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.expressiveStandardScore"
+						allow-only-numbers /></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.expressiveAge"
+						allow-only-numbers /></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.expressivePercentile"
+						allow-only-numbers /></td>
+					<td><input type="text" class="form-control"
+						ng-model="exitNote.evalutionSheetResult.expressiveDelay"
+						allow-only-numbers /></td>
+				</tr>
+				<tr>
+					<td>Total Language Score</td>
+					<td><input type="text" class="form-control" allow-only-numbers/></td>
+					<td><input type="text" class="form-control" allow-only-numbers/></td>
+					<td><input type="text" class="form-control" allow-only-numbers/></td>
+					<td><input type="text" class="form-control" allow-only-numbers/></td>
+				</tr>
+			</table>
+		<div
+			ng-repeat="evalutionCategory in exitNote.patientQuestionCategories">
+			<label>{{evalutionCategory.name}}:</label><br>
+			<div class="col-sm-12 border">
+				<div
+					ng-repeat="evalutionQuestion in evalutionCategory.patientQuestions">
+					<b>{{evalutionQuestion.questionName}}?</b>
+					<div ng-repeat="answer in evalutionQuestion.patientAnswers">
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" ng-model="answer.selectedAnswer">&nbsp;&nbsp;{{answer.shortAnswer}}
+					</div>
+					<br> <br>
+				</div>
+			</div>
+		</div>
+
+
+		<br> <label>Oral Motor :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="1000"
+			ng-model="exitNote.oralMotor"></textarea>
+		<p style="font-size: 11px;color: blue">{{1000-exitNote.oralMotor.length}}&nbsp;Characters Left</p>	
+
+		<br> <label>Pragmatic Skills :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="500"
+			ng-model="exitNote.pragmaticSkills"></textarea>
+		<p style="font-size: 11px;color: blue">{{500-exitNote.pragmaticSkills.length}}&nbsp;Characters Left</p> 	
+
+
+		<br> <label>Summary :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="2000"
+			ng-model="exitNote.summary"></textarea>
+		<p style="font-size: 11px;color: blue">{{2000-exitNote.summary.length}}&nbsp;Characters Left</p> 
+
+		<br> <label>Recommendations :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="5000"
+			ng-model="exitNote.recommandations"></textarea>
+		<p style="font-size: 11px;color: blue">{{5000-exitNote.recommandations.length}}&nbsp;Characters Left</p>	
+
+		<br> <label>Parental Tips :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5" ng-trim="false" maxlength="5000"
+			ng-model="exitNote.parentalTips"></textarea>
+		<p style="font-size: 11px;color: blue">{{5000-exitNote.parentalTips.length}}&nbsp;Characters Left</p>	
+	</div>
+	<div class=col-lg-12 col-md-12 col-sm-12 col-xs-12>
+		<strong>It was a pleasure to meet and work with {{patientObject.firstName}} {{patientObject.lastName}}.
+			Feel free to contact me with any questions.</strong> <br> <label>Assessment
+			and therapy session completed by:</label> <br> <br> <br> <br>
+		<label ng-if="doctorObj != undefned">Upload Your signarure</label><input type="file" name="file" ng-if="doctorObj != undefned"
+									onchange="angular.element(this).scope().fileChanged(this.files)"
+									required>
+	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
+		<button class="btn btn-primary" ng-click="addExitNoteSheet()">Save</button>
+		<a ng-click="gotoList();" class="btn btn-warning">Cancel</a>
+		<!-- <button class="btn btn-primary" ng-click="generateExitNoteReport()">Generate Report</button>
+		<embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed> -->
+	</div>
+</div>

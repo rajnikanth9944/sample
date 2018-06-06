@@ -1,0 +1,210 @@
+<div class="content-wrapper"
+	ng-init="getAllDepartments();getCountrysBasedOnIsdCode();getTherapistByUsername();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Therapist</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Therapist</li>
+			</ol>
+
+		</div>
+	</section>
+
+
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> Update
+								Profile
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="col-sm-12" name="updateTherapistform">
+							<div class="col-sm-6 form-group">
+								<label>First Name</label> <input type="text" id="txt_firstName"
+									aria-required="true" ng-model="therapist.firstName"
+									name="firstName" value="" class="form-control"
+									placeholder="Enter firstname" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Last Name</label> <input type="text" class="form-control"
+									ng-model="therapist.lastName" placeholder="Enter Lastname"
+									name="lastName" value="" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Email</label> <input type="email" class="form-control"
+									ng-model="therapist.email" value="therapist.email"
+									placeholder="Enter Email" readonly="readonly" required>
+							</div>
+							<div class="col-sm-6 form-group"
+								ng-disabled="therapist.npi != undefined">
+								<label>NPI Number</label> <input type="text"
+									class="form-control" ng-model="therapist.npi"
+									placeholder="Enter NPI Number" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Designation</label> <input type="text"
+									ng-model="therapist.designation" class="form-control"
+									placeholder="Enter Designation" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Specialization</label> <input type="text"
+									ng-model="therapist.specialization" class="form-control"
+									placeholder="Enter specialization" required>
+							</div>
+							<div class="col-sm-6">
+								<label>Department</label> <select class="form-control"
+									id="exampleSelect1" ng-model="therapist.department"
+									ng-options="department as department.departmentName for department in departmentsList track by department.id"
+									name="select" size="1">
+									<option>select</option>
+
+								</select>
+							</div>
+							<!-- <div class="col-sm-6 form-group">
+								<label>Address</label> <input type="text" class="form-control"
+									ng-model="therapist.firstName" placeholder="Address" required>
+							</div> -->
+
+							<div class="col-sm-6 form-group">
+								<label>Mobile</label> <input type="text" class="form-control"
+									phone-input maxlength="14" minlength="14" value=""
+									d="txt_mobileNumber" name="mobileNumber"
+									ng-model="therapist.mobileNumber" placeholder="Enter Mobile"
+									aria-required="true" class="error" id="txt_user_mobileNumber"
+									aria-invalid="true" mobile-available
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									maxlength="10" required> <span style="color: red"
+									ng-cloak
+									ng-show="(updateTherapistform.mobileNumber.$dirty &&updateTherapistform.mobileNumber.$invalid)">
+									<span
+									ng-show="updateTherapistform.mobileNumber.$error.required">MobileNumber
+										is required.</span> <span
+									ng-show="((updateTherapistform.mobileNumber.$error.minlength ||
+                          updateTherapistform.mobileNumber.$error.maxlength) && 
+                           updateTherapistform.mobileNumber.$dirty) ">
+										phone number should be 10 digits </span>
+									<div ng-if="updateTherapistform.$pending.mobileNumberExists">checking....</div>
+									<div ng-if="updateTherapistform.$error.mobileNumberExists">MobileNumber
+										exists already</div>
+							</div>
+
+
+							<div class="col-sm-6 form-group">
+								<label>Country</label> <select ng-model="therapist.countryName"
+									class="form-control" name="country" aria-required="true"
+									aria-invalid="true"
+									ng-options="country as country.name  for country in countriesList track by country.id"
+									ng-change="getAllStatesByCountryId(therapist.countryName.id);"
+									required>
+									<option value="" class="active">Select Country</option>
+								</select>
+								<!-- <span style="color: red" ng-cloak
+								ng-show="(registrationForm.country.$touched && registrationForm.country.$invalid)">
+								<span ng-show="registrationForm.country.$error.required">Country
+									is required.</span> -->
+							</div>
+							<!-- <div class="form-group col-lg-6"
+							ng-if="selectedName=='Organization'">
+							<label>State</label> <select class="form-control"
+								ng-model="user.stateName"
+								ng-options="state as state.name for state in statesList"
+								ng-change="getAllCitiesByStateId(user.stateName.id);" required>
+							</select>
+						</div> -->
+							<div class="col-sm-6 form-group">
+								<label>State</label> <select ng-model="therapist.stateName"
+									class="form-control" name="state" aria-required="true"
+									aria-invalid="true"
+									ng-options="state as state.name for state in statesList track by state.id"
+									ng-change="getAllCitiesByStateId(therapist.stateName.id);"
+									required>
+									<option value="" class="active">Select State</option>
+								</select>
+								<!-- <span style="color: red" ng-cloak
+								ng-show="(registrationForm.state.$touched && registrationForm.state.$invalid)">
+								<span ng-show="registrationForm.state.$error.required">State
+									is required.</span> -->
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>City</label> <select ng-model="therapist.cityName"
+									class="form-control" name="city" aria-required="true"
+									aria-invalid="true"
+									ng-options="city as city.name  for city in citiesList track by city.id"
+									required>
+									<option value="" class="active">Select City</option>
+								</select>
+								<!-- <span style="color: red" ng-cloak
+								ng-show="(registrationForm.city.$touched && registrationForm.city.$invalid)">
+								<span ng-show="registrationForm.city.$error.required">City
+									is required.</span> -->
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Address</label>
+								<textarea type="text" class="form-control" rows="3"
+									ng-model="therapist.address1" placeholder="Enter Address"
+									required></textarea>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Zip/Postal Code</label> <input type="text"
+									ng-model="therapist.zipcode" class="form-control"
+									placeholder="Enter zipcode" required>
+							</div>
+
+
+							<div class="col-sm-6 form-group">
+								<div class="form-check">
+									<label>Status</label><br> <label class="radio-inline">
+										<input type="radio" name="active" ng-model="therapist.active"
+										ng-value="true">Active
+									</label> <label class="radio-inline"> <input type="radio"
+										name="active" ng-model="therapist.active" ng-value="false">Inctive
+									</label>
+								</div>
+							</div>
+
+
+							<div class="col-sm-12 form-group">
+								<label>Short Biography</label>
+								<textarea id="some-textarea" class="form-control" rows="3"
+									ng-model="therapist.shortAutoBiography"
+									placeholder="Enter text ..."></textarea>
+							</div>
+
+							<div class="reset-button">
+								<a class="btn btn-success" ng-click="updateTherapist(therapist)">Update</a>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</div>
+<!-- /.content -->
+

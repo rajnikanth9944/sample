@@ -1,0 +1,221 @@
+						<div class="panel-body" ng-init="getPatientDocuments('PATIENT');getEvaluationDocuments('EVALUATION');getTherapistDocuments('THERAPIST');">
+							<div class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.firstName}} {{patientObject.lastName}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Date of Birth :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.dateOfBirth |date}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>SSN :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>****************</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>UCI :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.ucl}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Age :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.age}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Parent Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gaurdian}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Mobile Number :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{changeMobileNumber(patientObject.mobileNumber);}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>ClientType :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.clientType.clientTypeName}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Sex :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gender}}</p>
+									</div>
+								</div>
+								<br> <br>
+							</div>
+							<br>
+							<h3>PatientUpload Documents</h3>
+
+
+<table class="col-sm-4">
+<tr>
+<th>Patient<th>
+</tr>
+<tr ng-repeat="document in patientDocumentsList">
+<td ng-click="displayPDF(document.id)">{{document.name}}</td>
+<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:red;" ng-click="deleteDocumentalert(document)" aria-hidden="true" data-toggle="modal"
+												data-target="#ordine"></i>
+<!-- <div id="ordine" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+
+													Modal content
+													<div class="modal-content ">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">x</button>
+															<h4 class="modal-title">Please Confirm</h4>
+														</div>
+														<div class="modal-body" align="center">
+															<img src="assets/Delete_Icon.png" 
+																  align="center"> <br>
+																  <br>
+															
+															<button type="button" class="btn btn-info"
+																data-dismiss="modal" class="col-sm-6">Cancel
+																</button>
+															&nbsp;&nbsp;&nbsp;
+
+															<button class="btn btn-danger"
+																data-placement="right" data-dismiss="modal"
+																ng-click="deleteDocumnetbyPatient(document)"
+																>Delete!
+															</button>
+														</div>
+													</div>
+												</div>
+											</div> -->
+</td>
+</tr>
+</table>
+
+
+<table class="col-sm-4">
+<tr>
+<th>Evaluation<th>
+</tr>
+<tr ng-repeat="document in evaluationDocumentsList">
+<td ng-click="displayPDF(document.id)">{{document.name}}</td>
+<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:red;" ng-click="deleteDocumentalert(document)" aria-hidden="true" data-toggle="modal"
+												data-target="#ordine"></i>
+<!-- <div id="ordine" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+
+													Modal content
+													<div class="modal-content ">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">x</button>
+															<h4 class="modal-title">Please Confirm</h4>
+														</div>
+														<div class="modal-body" align="center">
+															<img src="assets/Delete_Icon.png" 
+																  align="center"> <br>
+																  <br>
+															
+															<button type="button" class="btn btn-info"
+																data-dismiss="modal" class="col-sm-6">Cancel
+																</button>
+															&nbsp;&nbsp;&nbsp;
+
+															<button class="btn btn-danger"
+																data-placement="right" data-dismiss="modal"
+																ng-click="deleteDocumnetbyPatient(document)"
+																>Delete!
+															</button>
+														</div>
+													</div>
+												</div>
+											</div> -->
+</td>
+</tr>
+</table>
+
+
+<table class="col-sm-4">
+<tr>
+<th>Therapist<th>
+</tr>
+<tr ng-repeat="document in therapistDocumentsList">
+<td ng-click="displayPDF(document.id)">{{document.name}}</td>
+<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:red;" ng-click="deleteDocumentalert(document)" aria-hidden="true" data-toggle="modal"
+												data-target="#ordine"></i>
+<!-- <div id="ordine" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+
+													Modal content
+													<div class="modal-content ">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">x</button>
+															<h4 class="modal-title">Please Confirm</h4>
+														</div>
+														<div class="modal-body" align="center">
+															<img src="assets/Delete_Icon.png" 
+																  align="center"> <br>
+																  <br>
+															
+															<button type="button" class="btn btn-info"
+																data-dismiss="modal" class="col-sm-6">Cancel
+																</button>
+															&nbsp;&nbsp;&nbsp;
+
+															<button class="btn btn-danger"
+																data-placement="right" data-dismiss="modal"
+																ng-click="deleteDocumnetbyPatient(document)"
+																>Delete!
+															</button>
+														</div>
+													</div>
+												</div>
+											</div> -->
+</td>
+</tr>
+</table>
+
+<div ng-if="content!=undefined">
+								<iframe src="{{content}}" width="100%" height="800px"></iframe>
+								</div>
+
+<!-- 
+							<p 
+								ng-click="displayPDF(document.id)">&nbsp &nbsp &nbsp<i class="fa fa-times" aria-hidden="true" ng-click=deleteDocumnetbyPatient(document.id)></i></p>
+							
+							<embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+								<div ng-if="content!=undefined">
+								<iframe src="{{content}}" width="100%" height="800px"></iframe>
+								</div> -->
+							<!-- <embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed> -->
+
+							<!-- <div class="reset-button col-sm-12">
+								<br> <br> <a href="#" class="btn btn-success">Save</a>
+								<a ng-click="gotoList();" class="btn btn-warning">Reset</a>
+							</div> -->
+						</div>

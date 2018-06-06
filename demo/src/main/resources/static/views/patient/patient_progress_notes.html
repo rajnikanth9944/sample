@@ -1,0 +1,232 @@
+<div class="panel-body table-responsive"
+	ng-init="getProgressSheetReportBy();patientGoalsInformation();getDoctorByPatientId();">
+	<div class="col-sm-12">
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Name :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.firstName}} {{patientObject.lastName}}</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Date of Test :</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="date" ng-model="today">
+			</div>
+		</div>
+
+		<br> <br>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>UCI :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.ucl}}</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Evaluator :</label>
+			</div>
+			<div class="col-sm-6" ng-if="doctorObj != undefined">
+				<p>{{doctorObj.firstName}} {{doctorObj.lastName}}</p>
+			</div>
+		</div>
+		<br> <br>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Age :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.age}}</p>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Service Coordinator :</label>
+			</div>
+			<div class="col-sm-6">
+				<p></p>
+			</div>
+		</div>
+		<br> <br>
+		<!-- <div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Language :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>20 months</p>
+			</div>
+		</div> -->
+		<div class="col-sm-6">
+			<div class="col-sm-6">
+				<label>Parent :</label>
+			</div>
+			<div class="col-sm-6">
+				<p>{{patientObject.gaurdian}}</p>
+			</div>
+		</div>
+		<br> <br>
+	</div>
+	<div class="col-sm-12">
+		<br> <label>History :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+			rows="5" ng-trim="false"1 maxlength="2000"
+			ng-model="progressNote1.history"></textarea>
+		<p style="font-size: 11px;color: blue">{{2000 - progressNote1.history.length}}&nbsp;Characters Left</p> <br> <label>Background
+			Information :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+			ng-trim="false" maxlength="3000" rows="5"
+			ng-model="progressNote1.backgroundInformation"></textarea>
+		<p style="font-size: 11px;color: blue">{{3000-progressNote1.backgroundInformation.length}}&nbsp;Characters Left</p> <br>
+		<label>Observation :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+			ng-trim="false" maxlength="2000" rows="5"
+			ng-model="progressNote1.observation"></textarea>
+		<p style="font-size: 11px;color: blue">{{2000-progressNote1.observation.length}}&nbsp;Characters Left</p> <br> <label>Test
+			Administered :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+			ng-trim="false" maxlength="1000" rows="5"
+			ng-model="progressNote1.testAdministered"></textarea>
+		<p style="font-size: 11px;color: blue">{{1000-progressNote1.testAdministered.length}}&nbsp;Characters Left</p>
+		<table
+			class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border table table-bordered table-hover"
+			cellspacing="10">
+			<tr>
+				<th>Result</th>
+				<th>Standard Score</th>
+				<th>Percentile</th>
+				<th>Age Equivalent</th>
+				<th>Delay %</th>
+			</tr>
+			<tr>
+				<td><label
+					ng-model="progressNote1.evalutionSheetResult.auditotyCategoryName">Auditoty
+						Comprehension</label></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.auditotyStandardScore"
+					allow-only-numbers /></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.auditotyAge"
+					allow-only-numbers /></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.auditotyPercentile"
+					allow-only-numbers /></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.auditotyDelay"
+					allow-only-numbers /></td>
+			</tr>
+			<tr>
+				<td><label
+					ng-model="progressNote1.evalutionSheetResult.expressiveCategoryName">Expressive
+						Communication</label></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.expressiveStandardScore"
+					allow-only-numbers /></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.expressiveAge"
+					allow-only-numbers /></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.expressivePercentile"
+					allow-only-numbers /></td>
+				<td><input type="text" class="form-control"
+					ng-model="progressNote1.evalutionSheetResult.expressiveDelay"
+					allow-only-numbers /></td>
+			</tr>
+			<tr>
+				<td>Total Language Score</td>
+				<td><input type="text" class="form-control" allow-only-numbers /></td>
+				<td><input type="text" class="form-control" allow-only-numbers /></td>
+				<td><input type="text" class="form-control" allow-only-numbers /></td>
+				<td><input type="text" class="form-control" allow-only-numbers /></td>
+			</tr>
+		</table>
+		<div ng-if="progressNote1.patientQuestionCategories == undefined">
+			<div ng-repeat="evalutionCategory in questionCategoryList">
+				<label>{{evalutionCategory.name}}:</label><br>
+				<div class="col-sm-12 border">
+					<div
+						ng-repeat="evalutionQuestion in evalutionCategory.questionDtos">
+						<b>{{evalutionQuestion.questionName}}?</b>
+						<div ng-repeat="answer in evalutionQuestion.answerDtos">
+							&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+								ng-model="answer.selectedAnswer">&nbsp;&nbsp;{{answer.shortAnswer}}
+						</div>
+						<br> <br>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-if="progressNote1.patientQuestionCategories != defined"
+			ng-repeat="evalutionCategory in progressNote1.patientQuestionCategories">
+			<label>{{evalutionCategory.name}}:</label><br>
+			<div class="col-sm-12 border">
+				<div
+					ng-repeat="evalutionQuestion in evalutionCategory.patientQuestions">
+					<b>{{evalutionQuestion.questionName}}?</b>
+					<div ng-repeat="answer in evalutionQuestion.patientAnswers">
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+							ng-model="answer.selectedAnswer">&nbsp;&nbsp;{{answer.shortAnswer}}
+					</div>
+					<br> <br>
+				</div>
+			</div>
+		</div>
+		<br> <label>Oral Motor :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+			ng-trim="false" maxlength="1000" rows="5"
+			ng-model="progressNote1.oralMotor"></textarea>
+		<p style="font-size: 11px;color: blue">{{1000-progressNote1.oralMotor.length}}&nbsp;Characters Left</p> <br> 
+		
+		<label>Pragmatic Skills :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" ng-trim="false" maxlength="500"
+			rows="5" ng-model="progressNote1.pragmaticSkills"></textarea>
+		<p style="font-size: 11px;color: blue">{{500-progressNote1.pragmaticSkills.length}}&nbsp;Characters Left</p> 
+
+
+		<br> <label>Summary :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" ng-trim="false" maxlength="2000"
+			rows="5" ng-model="progressNote1.summary"></textarea>
+		<p style="font-size: 11px;color: blue">{{2000-progressNote1.summary.length}}&nbsp;Characters Left</p> 
+
+		<br> <label>Recommendations :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" ng-trim="false" maxlength="5000"
+			rows="5" ng-model="progressNote1.recommandations"></textarea>
+		<p style="font-size: 11px;color: blue">{{5000-progressNote1.recommandations.length}}&nbsp;Characters Left</p>	
+
+		<br> <label>Parental Tips :</label>
+		<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" ng-trim="false" maxlength="5000"
+			rows="5" ng-model="progressNote1.parentalTips"></textarea>
+		<p style="font-size: 11px;color: blue">{{5000-progressNote1.parentalTips.length}}&nbsp;Characters Left</p>	
+
+
+	</div>
+
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ">
+		<div class="panel panel-bd lobidrag">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<h4>Patient Goal Information</h4>
+
+				</div>
+			</div>
+			<div class="panel-body">
+				<canvas id="bar" class="chart chart-bar" chart-data="data4"
+					chart-labels="labels4" chart-series="series4">
+                            </canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12" align="center">
+		<button class="btn btn-primary" ng-click="addProgressNoteSheet()">Save</button>
+		<a ng-click="gotoList();" class="btn btn-warning">Cancel</a>
+		<button class="btn btn-primary" ng-click="generateProgressReport()">Generate
+			Report</button>
+		<embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+
+	</div>
+</div>
